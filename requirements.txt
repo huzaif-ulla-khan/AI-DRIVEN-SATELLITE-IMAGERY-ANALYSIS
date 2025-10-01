@@ -1,0 +1,12 @@
+Flask==2.3.3
+gunicorn==21.2.0
+numpy==2.3.2
+pillow==10.4.0
+pytest-flask==1.2.0
+python-dotenv==1.0.0
+Flask==2.3.3
+gunicorn==21.2.0
+numpy==2.3.2
+pillow==10.4.0
+pytest-flask==1.2.0
+python-dotenv==1.0.0

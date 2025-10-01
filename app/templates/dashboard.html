@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-12">
+    <div class="p-3 rounded-4 bg-black border border-secondary">
+      <h2 class="h5 mb-1">Analysis Results</h2>
+      <div class="small text-secondary">
+        Lat: {{ lat }}, Lon: {{ lon }}, Radius: {{ radius_km }} km | {{ start_date }} → {{ end_date }}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="rounded-4 overflow-hidden shadow border border-secondary">
+      <div id="result-map" style="height: 380px;"></div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="rounded-4 p-3 bg-black border border-secondary shadow">
+      <h3 class="h6">Land Cover Distribution</h3>
+      <div id="pie"></div>
+    </div>
+    <div class="rounded-4 p-3 bg-black border border-secondary shadow mt-3">
+      <h3 class="h6">Class Confidences</h3>
+      <div id="bar"></div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <a class="btn btn-outline-light" href="{{ csv_url }}" download>Download CSV Report</a>
+    <a class="btn btn-primary ms-2" href="/">Analyze Another Location</a>
+  </div>
+</div>
+
+<!-- Load Plotly for charts -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script>
+  // Ensure numeric types in JS
+  const LAT = {{ lat | tojson }};
+  const LON = {{ lon | tojson }};
+  const DIST = {{ distribution | tojson }};
+  const CONF = {{ confidences | tojson }};
+  const OVERLAY_B64 = {{ overlay_b64 | tojson }};
+
+  // Map + base layer
+  const m = L.map('result-map').setView([LAT, LON], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(m);
+
+  // Image overlay bounds (demo scale ~1.1km box). Adjust as needed.
+  const d = 0.01;
+  const bounds = [[LAT - d, LON - d], [LAT + d, LON + d]];
+  L.imageOverlay(OVERLAY_B64, bounds, { opacity: 0.7 }).addTo(m);
+
+  // Pie: land-cover distribution
+  Plotly.newPlot('pie', [{
+    labels: Object.keys(DIST),
+    values: Object.values(DIST),
+    type: 'pie'
+  }], { margin: { t: 10 } });
+
+  // Bar: confidences
+  Plotly.newPlot('bar', [{
+    x: Object.keys(CONF),
+    y: Object.values(CONF),
+    type: 'bar'
+  }], {
+    yaxis: { range: [0, 1] },
+    margin: { t: 10 }
+  });
+</script>
+{% endblock %}
