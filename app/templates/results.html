@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="p-4 bg-black rounded-4 border border-secondary">
+  <h2 class="h4">Request received</h2>
+  <p class="mb-1">Latitude: <strong>{{ lat }}</strong></p>
+  <p class="mb-1">Longitude: <strong>{{ lon }}</strong></p>
+  <p class="mb-1">Radius (km): <strong>{{ radius_km }}</strong></p>
+  <p class="mb-1">Start date: <strong>{{ start_date or "—" }}</strong></p>
+  <p class="mb-3">End date: <strong>{{ end_date or "—" }}</strong></p>
+
+  <a class="btn btn-outline-light" href="/">Analyze another location</a>
+</div>
+{% endblock %}

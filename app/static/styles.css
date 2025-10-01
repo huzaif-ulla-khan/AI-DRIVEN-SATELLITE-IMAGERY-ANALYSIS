@@ -1,0 +1,7 @@
+:root {
+  --grad1:#0f2027; --grad2:#203a43; --grad3:#2c5364;
+}
+body { background: linear-gradient(135deg, var(--grad1), var(--grad2), var(--grad3)); min-height:100vh; }
+#map { height: 520px; border-radius: 1rem; border: 1px solid rgba(255,255,255,.15); }
+.hero { background: radial-gradient(1000px 300px at 10% 10%, rgba(33,150,243,.12), transparent);
+        border: 1px solid rgba(255,255,255,.08); border-radius: 1rem; }
