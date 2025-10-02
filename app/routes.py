@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template, request, url_for, current_app
 from datetime import datetime
 import os, time
+from app.services.predict_keras import predict as predict_real
 
 from app.services.fetch import fetch_satellite_image_stub
-from app.services.predict import predict_stub
+# from app.services.predict import predict_stub   # ⛔ comment out
+
 from app.services.report import ensure_dir, save_csv_report, to_base64_png
 
 main = Blueprint('main', __name__)
@@ -25,7 +27,8 @@ def analyze():
     img = fetch_satellite_image_stub(lat, lon, radius_km, start_date, end_date)
 
     # 2) Predict (stub)
-    pred = predict_stub(img)  # overlay (PIL RGBA), distribution, confidences
+    pred = predict_real(img)
+  # overlay (PIL RGBA), distribution, confidences
 
     # 3) Save CSV report
     exports_dir = os.path.join(current_app.root_path, "static", "exports")

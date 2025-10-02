@@ -1,0 +1,11 @@
+lat,31.398191
+lon,34.350352
+radius_km,5.0
+start_date,2024-01-01
+end_date,2025-10-01
+
+class,percent
+barren,82.77
+forest,0.03
+urban,3.07
+water,14.13
