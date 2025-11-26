@@ -1,167 +1,174 @@
 🌍 AI-Driven Satellite Imagery Analysis Platform
-
-A Deep Learning–Powered System for Land-Cover Classification, Environmental Monitoring & Geospatial Intelligence
-
+A Deep Learning–Powered System for Environmental Monitoring, Land-Cover Intelligence & Geospatial Analytics
+<img src="screenshots/dashboard.png" width="100%">
 🚀 Overview
 
-This project is a full-stack AI application designed to analyze satellite imagery and generate meaningful environmental insights.
-It combines remote sensing, deep learning, and interactive visualization to give users a modern, dashboard-style interface for real-time analysis of any geographic location on Earth.
+This project is an advanced AI-powered satellite imagery analysis platform designed to transform multispectral data into meaningful environmental insights.
 
-The system ingests satellite tiles, processes spectral bands, computes vegetation/water/fire indices, and uses AI models to classify land-cover types and generate segmentation masks — all inside a web-based application.
+It integrates:
+
+✔ Remote sensing
+✔ Deep learning (CNNs, UNet)
+✔ Spectral index computation (NDVI, NDWI, NBR)
+✔ Interactive visual dashboards
+
+Users can analyze any geographic location by entering coordinates/date ranges and instantly visualize vegetation health, water spread, fire damage, land-cover type, and more.
 
 ✨ Key Features
 🛰️ 1. Satellite Data Retrieval
 
-Fetches real-world satellite imagery (Sentinel-2 or compatible sources)
+Fetches real satellite tiles (Sentinel-2 or compatible).
 
-Automatically reads spectral bands (Red, Green, Blue, NIR, SWIR)
+Reads multispectral bands (RGB, NIR, SWIR).
 
-Supports bounding box selection, coordinates, and date filtering
+Supports bounding box selection, coordinates, and date filtering.
+
+Auto-preprocessing (resizing, normalization, cloud-safe extraction).
+
+📸 Placeholder Screenshot:
+/screenshots/satellite_fetch.png
 
 🌱 2. Crop Yield Insight (NDVI-Based)
 
-Computes Normalized Difference Vegetation Index (NDVI)
+Computes NDVI for vegetation health.
 
-Produces vegetation health maps
+Color-coded vegetation map.
 
-Generates vegetation histogram distribution
+Histogram showing vegetation distribution.
 
-Helps identify crop stress, yield potential & green cover density
+Useful for crop monitoring, farming cycles & yield prediction.
 
-🌲 3. Deforestation / Vegetation Cover Change
+📊 Placeholder Screenshot:
+/screenshots/ndvi_analysis.png
 
-Tracks forested vs. degraded areas
+🌲 3. Deforestation / Vegetation Change
 
-Produces before/after comparison maps
+Detects forest loss, degradation & thinning.
 
-Highlights vegetation loss using NBR (Normalized Burn Ratio)
+Uses NBR (Normalized Burn Ratio) for vegetation burn detection.
 
-Suitable for climate studies, forest monitoring & eco-audit reporting
+Before-after comparison.
+
+Ideal for climate studies & environmental reporting.
+
+📊 Placeholder Screenshot:
+/screenshots/deforestation.png
 
 ⚠️ 4. Disaster & Crisis Mapping
 
-Flood – NDWI-based water spread identification
+Flood detection → NDWI
 
-Wildfire – NBR-based burn severity mapping
+Wildfire damage → NBR
 
-Drought – NDVI drop analysis
+Drought severity → NDVI drop
 
-Automatically visualizes high-risk zones
+Highlights high-risk regions with overlays.
+
+📊 Placeholder Screenshot:
+/screenshots/disaster_analysis.png
 
 📈 5. Temporal Change Analysis
 
-Time-series NDVI trend visualization
+Multi-date NDVI trend chart.
 
-Detects long-term vegetation decline
+Visualizes climate & vegetation health over time.
 
-Useful for agriculture, urbanization, land management
+📉 Placeholder Screenshot:
+/screenshots/temporal_analysis.png
 
-🤖 6. AI Land-Cover Classification (CNN Model)
+🤖 6. AI Land-Cover Classification
 
-Uses a MobileNet/ResNet-based deep learning classifier
+Deep CNN model (MobileNetV2/ResNet).
 
-Classifies tiles into categories like:
+Classifies land into:
 
 Water
 
 Vegetation
 
-Urban area
+Urban
+
+Agricultural
 
 Barren land
 
-Agricultural field
+Outputs predicted label + confidence.
 
-Outputs probability scores + predicted class
+📸 Placeholder Screenshot:
+/screenshots/classification.png
 
 🗺️ 7. Land-Cover Segmentation (UNet)
 
-Pixel-level segmentation map
+Pixel-level segmentation.
 
-Highlights roads, structures, vegetation, and water
+Color-coded mask showing roads, buildings, vegetation, water.
 
-Useful for urban planning, GIS analytics, and environmental studies
+Great for GIS, planning & infrastructure studies.
 
-📊 8. Interactive Web Dashboard
+📸 Placeholder Screenshot:
+/screenshots/segmentation.png
 
-Modern UI
+🧭 8. Modern Interactive Dashboard
 
-Real-time charts & color-coded overlays
+Live charts, overlays, analytics modules.
 
-Multi-feature analysis selection
+Clean UI with modular sections.
 
-Responsive & mobile-friendly
+Works on desktop & mobile.
+
+🌐 Screenshot:
+/screenshots/dashboard_full.png
 
 🧠 Technologies Used
-Backend & Processing
+Backend
 
-Python
+Python • Flask
 
-Flask
+NumPy, Pandas
 
-NumPy, OpenCV, Rasterio
+Rasterio, GDAL
 
-GDAL, STAC API clients
+STAC API / Planetary Computer
 
-PyTorch / TensorFlow (for AI models)
+Deep Learning
 
-Deep Learning Models
+PyTorch / TensorFlow
 
-MobileNetV2 / ResNet → For land-cover classification
+MobileNetV2, ResNet (classification)
 
-UNet / SegNet → For semantic segmentation
+UNet / SegNet (segmentation)
 
-NDVI, NDWI, NBR algorithms → For index computation
+NDVI / NDWI / NBR algorithms
 
 Frontend
 
-HTML / CSS
+HTML / CSS / JS
 
-JavaScript
+Chart.js / D3.js
 
-Chart.js or D3.js for analytics
+Bootstrap / Tailwind (optional)
 
-Leaflet.js / Mapbox (optional future integration)
+Leaflet.js / Mapbox (optional future)
 
-📁 Project Structure (Generic)
+📁 Generic Project Structure
+**
 project/
 │── app/
 │   ├── static/          # CSS, JS, images
-│   ├── templates/       # HTML dashboard UI
-│   ├── services/        # Data fetch, models, index calculations
-│   ├── models/          # ML model weights (.pt, .h5)
-│   ├── utils/           # Helper scripts
-│   └── routes.py        # API endpoints & dashboard logic
+│   ├── templates/       # HTML dashboard pages
+│   ├── services/        # Models, indices, data fetches
+│   ├── models/          # ML model weights
+│   ├── utils/           # Helpers
+│   └── routes.py        # API endpoints
 │
-│── dataset/             # Optional training datasets
-│── requirements.txt     # All dependencies
+│── dataset/             # Optional ML datasets
+│── requirements.txt     # Dependencies
 │── wsgi.py              # Entry point
-│── README.md            # Documentation
-│── .env                 # Secrets and file paths
-│── .gitignore           # Ignored large files/logs
+│── README.md            # Project documentation
+│── .env                 # Environment variables
+│── .gitignore           # Ignore unnecessary files
 
-🧪 How It Works (Simplified Pipeline)
-
-User enters latitude, longitude, and date range
-
-System searches satellite data for that region
-
-Spectral bands are extracted
-
-Preprocessing (resizing, normalization, cloud masking, etc.)
-
-NDVI → Crop health
-
-NDWI → Water/flooding
-
-NBR → Fire damage
-
-CNN → Land-cover class
-
-UNet → Segmentation mask
-
-Outputs are visualized through dashboard with charts, overlays & insights
-
+**
 🔧 Installation & Setup
 1. Clone Repository
 git clone https://github.com/yourname/satellite-imagery-analysis.git
@@ -169,33 +176,85 @@ cd satellite-imagery-analysis
 
 2. Create Virtual Environment
 python -m venv final
-source final/bin/activate   # Mac/Linux
 final\Scripts\activate      # Windows
+source final/bin/activate   # macOS/Linux
 
 3. Install Dependencies
 pip install -r requirements.txt
 
-4. Run App
+4. Run Application
 flask run
 
-📊 Future Enhancements
+🧪 How It Works (Simplified Architecture)
+1. User Input
 
-Interactive world map with click-to-analyze
+Latitude, longitude
 
-Integration with Google Earth Engine
+Date range
 
-Automatic report generation (PDF)
+Analysis mode
 
-AI-based cloud removal
+2. Satellite Retrieval
 
-Crop disease detection model
+Fetches RGB + spectral bands
 
-YOLO-based feature detection (roads, buildings, etc.)
+Preprocessing & resizing
+
+3. Index Calculations
+
+NDVI → vegetation
+
+NDWI → water
+
+NBR → burn detection
+
+4. AI Processing
+
+CNN → land-cover class
+
+UNet → pixel segmentation
+
+5. Visualization
+
+Charts
+
+Maps
+
+Overlays
+
+Insight cards
+
+🌟 Future Enhancements
+
+Interactive world map (click to analyze)
+
+Google Earth Engine Integration
+
+YOLO-based building/road detection
+
+Crop disease prediction
+
+Auto PDF report generation
+
+👨‍💻 Author
+
+Huzaif Ulla Khan
+AI & Data Science Enthusiast
+Email: your.email@example.com
+
+GitHub: github.com/your-profile
 
 🤝 Contributions
 
-Pull requests, feedback, and feature requests are welcome!
+Contributions and feature requests are welcome!
+Feel free to submit:
+
+Pull requests
+
+Suggestions
+
+Feedback
 
 📜 License
 
-This project is released under the MIT License.
+MIT License — Free to use & modify.
